@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRO</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 40px;
+      color: #333;
+    }
+
+    th {
+      font-size: 64px;
+      padding: 25px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 10px rgba(255, 120, 160, 0.5);
+      animation: fadeInDown 1s ease-out;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: auto;
+      width: 70%;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      animation: fadeIn 1.5s ease;
+    }
+
+    td {
+      padding: 20px;
+      font-weight: bold;
+      font-size: 22px;
+      color: #555;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    td:hover {
+      background-color: #ffe4ec;
+      transform: scale(1.05);
+    }
+
+    img {
+      width: 250px;
+      height: 250px;
+      border-radius: 15px;
+      margin-top: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    img:hover {
+      transform: scale(1.15) rotate(2deg);
+      box-shadow: 0 12px 25px rgba(255, 105, 180, 0.5);
+    }
+
+    /* 📸 Açılır büyük fotoğraf (lightbox) */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .lightbox img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    /* 🎨 Renk seçici */
+    #colorPicker {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #ffb6c1;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      img {
+        width: 150px;
+        height: 150px;
+      }
+      th {
+        font-size: 40px;
+      }
+      table {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <th colspan="2">BAAABAAAAA</th>
+    </tr>
+    <tr>
+      <td>1<br><img src="foto/IMG_20240104_163431.jpg" alt="Fotoğraf 1" onclick="openLightbox(this.src)"></td>
+      <td>1<br><img src="foto/IMG_20240203_131540.jpg" alt="Fotoğraf 2" onclick="openLightbox(this.src)"></td>
+    </tr>
+    <tr>
+      <td>2<br><img src="foto/IMG_20240117_080729.jpg" alt="Fotoğraf 3" onclick="openLightbox(this.src)"></td>
+      <td>2<br><img src="foto/IMG_20240117_130624.jpg" alt="Fotoğraf 4" onclick="openLightbox(this.src)"></td>
+    </tr>
+  </table>
+
+  <!-- 🎨 Arka plan rengi seçici -->
+  <div>
+    <label for="colorPicker">Açılır fotoğraf arka plan rengi:</label>
+    <input type="color" id="colorPicker" value="#000000">
+  </div>
+
+  <!-- 💡 Açılır fotoğraf kutusu -->
+  <div class="lightbox" id="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">&times;</span>
+    <img id="lightboxImg" src="" alt="Büyük Fotoğraf">
+  </div>
+
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const colorPicker = document.getElementById("colorPicker");
+
+    // Fotoğrafa tıklayınca aç
+    function openLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.style.display = "flex";
+      lightbox.style.backgroundColor = colorPicker.value + "cc"; // seçilen renk + saydamlık
+    }
+
+    // Kapatma fonksiyonu
+    function closeLightbox() {
+      lightbox.style.display = "none";
+    }
+
+    // Renk değişince anında uygula
+    colorPicker.addEventListener("input", function() {
+      lightbox.style.backgroundColor = colorPicker.value + "cc";
+    });
+  </script>
+</body>
+</html>
+
